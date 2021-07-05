@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Cliente</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
+</head>
+<body>
+    <h1>CRUD Cliente</h1>
+    <h3>Añadir</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+        <input type="number" id="identificador" maxlength="16" min="1" pattern="^[0-9]+" placeholder="Id">
+        <input type="text" id="nombre" maxlength="128" placeholder="Nombre" onkeyup="validarNombre(this.id)" onkeypress="validarNombre(this.id)">
+        <input type="submit" value="Añadir">
+    </form>
+
+    <div id="editForm">
+        <h3>Editar</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <table>
+                    <tr>
+                        <th></th>
+                        <th>Estado</th>
+                        <th>Nombre Completo</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                <tbody>
+                    <tr>
+                        <td><input type="hidden" id="edit-id"></td>
+                        <td><input type="checkbox" id="edit-isActivo"></td>
+                        <td><input type="text" maxlength="128" id="edit-nombre" placeholder="Nombre" onkeyup="validarNombre(this.id)" onkeypress="validarNombre(this.id)"></td>
+                        <td><input type="submit" value="Guardar"></td>
+                        <td><a onclick="closeInput()" aria-label="Cerrar">&#10006;</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <p id="counter"></p>
+    <div class="container">
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Identificador</th>
+                            <th>Nombre Completo</th>
+                            <th>Estado</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientes">
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 text-center">
+                <ul class="pagination pagination-lg pager" id="myPager"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getItems();
+    </script>
+</body>
+</html>
